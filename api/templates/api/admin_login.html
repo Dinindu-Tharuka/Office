@@ -1,0 +1,39 @@
+{% extends 'api/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Horizontal Nav Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">
+    
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">
+            <span class="material-symbols-outlined">
+              arrow_back_ios
+              </span>
+          </a>
+        </li>
+        
+        
+      </ul>
+      
+    </div>
+  </nav>
+<!-- Horizontal Nav Bar -->
+
+
+<div class="d-flex flex-column justify-content-center align-items-center h-75">
+    <h1>Admin Login</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login" class="btn btn-info">
+    </form>
+</div>
+
+
+
+{% endblock content %}

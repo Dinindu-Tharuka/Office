@@ -1,0 +1,28 @@
+{% extends 'api/base.html' %} {% block content %}
+
+<div class="d-flex justify-content-center align-items-center h-100 gap-1">
+  <div class="h-25 w-25 d-flex">
+    <button
+      class="btn btn-primary btn-lg align-self-stretch flex-fill d-flex h-100"
+    >
+      <a
+        href="{% url 'client-login' %}"
+        class="nav-link align-self-stretch flex-fill d-flex justify-content-center align-items-center"
+        >Client</a
+      >
+    </button>
+  </div>
+  <div class="h-25 w-25 d-flex justify-content-center align-items-center">
+    <button
+      class="btn btn-primary btn-lg align-self-stretch flex-fill d-flex h-100"
+    >
+      <a
+        href="{% url 'admin-login' %}"
+        class="nav-link align-self-stretch flex-fill d-flex justify-content-center align-items-center"
+        >Admin</a
+      >
+    </button>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+
+{% extends 'api/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- Horizontal Nav Bar -->
+<nav class="navbar navbar-expand-lg d-flex">
+    
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto w-100">
+        <li class="nav-item active w-100">
+          <div class="d-flex justify-content-between">
+            <a class="nav-link" href="{% url 'home' %}">
+              <span class="material-symbols-outlined">
+                arrow_back_ios
+                </span>
+            </a>
+            <button class="btn btn-primary btn-lg"><a href="{% url 'register-user' %}" class="nav-link">Register</a></button>
+          
+          </div>
+        </li>
+        
+        
+      </ul>
+      
+    </div>
+  </nav>
+<!-- Horizontal Nav Bar -->
+
+
+<div class="d-flex flex-column justify-content-center align-items-center h-75">
+    <h1>Client Login</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+          {{ form.username|add_label_class:"form-label"}}
+          {% render_field form.username class="form-control" %}
+      </div>
+      <!-- First Name -->
+      <div class="mb-4">
+          {{ form.password|add_label_class:"form-label"}}
+          {% render_field form.password class="form-control" %}
+      </div>
+        <input type="submit" value="Login" class="btn btn-info ">
+    </form>
+    
+</div>
+
+
+
+{% endblock content %}

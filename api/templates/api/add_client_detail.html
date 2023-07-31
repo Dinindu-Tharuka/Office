@@ -1,0 +1,198 @@
+{% extends 'api/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Horizontal Nav Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex h-5">
+    
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto w-100">
+        <li class="nav-item active w-100">
+        {% if user.is_staff %}
+        <a class="nav-link" href="{% url 'admin-screen' %}">
+            <span class="material-symbols-outlined">
+            arrow_back_ios
+            </span>            
+          </a>        
+          
+        {% else %}
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'client-detail-view' %}" class="nav-link">
+                <span class="material-symbols-outlined">
+                    arrow_back_ios
+                </span>
+            </a>
+            <button class="btn btn-primary btn-lg"><a href="{% url 'admin-logout' %}" class="nav-link">Logout</a></button>
+            
+        </div>
+        {% endif %}
+        </li>
+        
+        
+      </ul>
+      
+    </div>
+  </nav>
+<!-- Horizontal Nav Bar -->
+
+
+<div class="d-flex flex-column align-items-center">
+
+    <h1>Clients Detail Form</h1>
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="d-flex gap-4">
+            <div>
+                <!-- User -->
+               
+                <div class="mb-4">
+                    {{ form.user|add_label_class:"form-label"}}
+                    {% render_field form.user class="form-control"  %}
+                </div>  
+                         
+                
+                <!-- First Name -->
+                <div class="mb-4">
+                    {{ form.first_name|add_label_class:"form-label"}}
+                    {% render_field form.first_name class="form-control" %}
+                </div>
+
+                <!-- Last Name -->
+                <div class="mb-4">
+                    {{ form.last_name|add_label_class:"form-label"}}
+                    {% render_field form.last_name class="form-control" %}
+                </div>
+
+                <!-- Number -->
+                <div class="mb-4">
+                    {{ form.number|add_label_class:"form-label"}}
+                    {% render_field form.number class="form-control" %}
+                </div>
+
+                <!-- NIC -->
+                <div class="mb-4">
+                    {{ form.nic|add_label_class:"form-label"}}
+                    {% render_field form.nic class="form-control" %}
+                </div>
+
+                <!-- date_of_issue -->
+                <div class="mb-4">
+                    {{ form.date_of_issue|add_label_class:"form-label"}}
+                    {% render_field form.date_of_issue class="form-control" type='date' %}
+                </div>
+                <!-- Address -->
+                <div class="mb-4">
+                    {{ form.address|add_label_class:"form-label"}}
+                    {% render_field form.address class="form-control" %}
+                </div>
+
+            </div>
+            <div>
+
+
+
+
+                <!-- birthday -->
+                <div class="mb-4">
+                    {{ form.birthday|add_label_class:"form-label"}}
+                    {% render_field form.birthday class="form-control" type='date' %}
+                </div>
+
+                <!-- gender -->
+                <div class="mb-4">
+                    {{ form.gender|add_label_class:"form-label"}}
+                    {% render_field form.gender class="form-control" %}
+                </div>
+                
+
+                <!-- precent_working_place -->
+                <div class="mb-4">
+                    {{ form.precent_working_place|add_label_class:"form-label"}}
+                    {% render_field form.precent_working_place class="form-control" %}
+                </div>
+
+                <!-- Photo -->
+                <div class="mb-8">
+                    {{ form.photo|add_label_class:"form-label"}}
+                    {% render_field form.photo class="form-control" %}
+                </div>
+
+                <!-- is_sri_lanka -->
+                <div class="mb-4">
+                    {{ form.is_sri_lanka|add_label_class:"form-label"}}
+                    {% render_field form.is_sri_lanka class="form-control" %}
+                </div>
+
+                <!-- remark -->
+                <div class="mb-4">
+                    {{ form.remark|add_label_class:"form-label"}}
+                    {% render_field form.remark class="form-control" %}
+                </div>
+            </div>
+
+            <div>
+
+                <!-- job -->
+                <div class="mb-4">
+                    {{ form.job|add_label_class:"form-label"}}
+                    {% render_field form.job class="form-control" %}
+                </div>
+
+                <!-- sector -->
+                <div class="mb-4">
+                    {{ form.sector|add_label_class:"form-label"}}
+                    {% render_field form.sector class="form-control" %}
+                </div>
+
+                <!-- city -->
+                <div class="mb-4">
+                    {{ form.city|add_label_class:"form-label"}}
+                    {% render_field form.city class="form-control" %}
+                </div>
+
+                <!-- district -->
+                <div class="mb-4">
+                    {{ form.district|add_label_class:"form-label"}}
+                    {% render_field form.district class="form-control" %}
+                </div>
+
+                <!-- province -->
+                <div class="mb-4">
+                    {{ form.province|add_label_class:"form-label"}}
+                    {% render_field form.province class="form-control" %}
+                </div>
+
+                <!-- category -->
+                <div class="mb-4">
+                    {{ form.category|add_label_class:"form-label"}}
+                    {% render_field form.category class="form-control" %}
+                </div>
+
+               
+
+                <input type="submit" value="Save" class="btn btn-outline-dark btn-lg">
+            </div>
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+    </form>
+
+</div>
+
+
+
+{% endblock content %}

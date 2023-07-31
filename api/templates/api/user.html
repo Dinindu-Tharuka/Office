@@ -1,0 +1,107 @@
+{% extends 'api/admin-screen-base.html' %}
+{% block content %}
+
+<!-- Horizontal Nav Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">  
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register-user' %}">Register User</a>
+        </li>        
+      </ul>      
+    </div>
+</nav>
+<!-- Horizontal Nav Bar -->
+
+<div class="d-flex justify-content-between">
+  <div></div>
+  <h3>User </h3>
+  <div></div>
+</div>
+
+
+
+<hr>
+
+<div class="w-100 d-flex align-items-center flex-column">
+  
+<table class="table table-primary w-75 ">
+  <tr class="p-4">
+      <th scope="col">Full Name</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+  </tr>
+  {% for user in users %}
+  <tr class="m-0 p-0">
+      {% if not user.is_staff %}      
+      <td scope="col">{{user.first_name}} {{user.last_name}}</td>
+      <td scope="col">{{user.email}}</td>
+      <td scope="col" class="d-flex justify-content-end">
+        <div>
+          <!-- <button class="btn btn-outline-info">
+            <a href="{% url 'update-user' user.id %}" class="nav-link">
+              <span class="material-symbols-outlined ">stylus</span>
+            </a>
+          </button> -->
+          <button class="btn btn-outline-danger">
+            <a href="{% url 'user-delete' user.id %}" class="nav-link">
+              <span class="material-symbols-outlined">delete</span>
+            </a>
+          </button>
+
+        </div>
+        </td>
+      {% endif %}
+  </tr>
+  {% empty %}
+  <p>No Category included.</p>
+  {% endfor %}
+</table>
+
+
+ <!-- Pagination -->
+
+<nav aria-label="Page navigation p-0 m-0">
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+
+    {% else %}
+
+    <a class="page-link" href="?page={{ page_obj.number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+    </a>               
+
+    {% endif %}
+
+    <li class="page-item"><a class="page-link active" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+
+    
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-current="page">{{ page_obj.next_page_number }}</a></li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% else %}
+
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    
+    {% endif %}
+    </ul>
+</nav>
+
+</div>
+
+{% endblock content %}

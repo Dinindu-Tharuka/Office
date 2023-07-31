@@ -1,0 +1,46 @@
+{% extends 'api/base.html' %} 
+ {% block content %}
+
+<nav class="navbar navbar-expand-lg d-flex">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto w-100">
+      <li class="nav-item active w-100">
+        <div class="d-flex justify-content-between">  
+          {% if user.is_staff %}
+          <a class="nav-link" href="{% url 'user' %}">
+            <span class="material-symbols-outlined"> arrow_back_ios </span>
+          </a>   
+          {% else %}
+          <a class="nav-link" href="{% url 'client-detail-view' %}">
+            <span class="material-symbols-outlined"> arrow_back_ios </span>
+          </a> 
+          {% endif %}                
+          
+          
+          <h1>Update {{user.username}}</h3>
+          
+          <div></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+{% if form.errors %}
+<p>There is error with your form</p>
+{% endif %}
+
+<div
+  class="shadow p-4 mb-5 bg-body rounded d-flex flex-column w-100 justify-content-center align-items-center"
+>
+  <form action="{% url 'update-user' user.id %}" method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <!-- {% if is_update %}
+    <input type="submit" value="Update" class="btn btn-secondary btn-lg" />
+    {% else %} -->
+    <input type="submit" value="Update" class="btn btn-secondary btn-lg" />
+    <!-- {% endif %} -->
+  </form>
+</div>
+
+{% endblock content %}

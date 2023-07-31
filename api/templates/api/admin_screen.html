@@ -1,0 +1,293 @@
+{% extends 'api/admin-screen-base.html' %} {% block content %}
+<hr />
+
+<!-- Horizontal Nav Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex p-0">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'add-client-detail' %}">Add Client</a>
+      </li>
+      <li class="nav-item active">
+        <a
+          class="nav-link"
+          href="#"
+          data-bs-toggle="modal"
+          data-bs-target="#download-modal"
+          >Download</a
+        >
+      </li>
+    </ul>
+    
+    <form method="GET" class="form-inline my-2 my-lg-0 d-flex">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        name="search-area"
+        value="{{search_text}}"
+      />
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+  </div>
+</nav>
+<!-- Horizontal Nav Bar -->
+
+<!-- Popup Dialog -->
+<div class="modal fade" id="download-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Download Posts</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex flex-column">
+  <hr />
+
+  <div class="d-flex justify-content-around gap-3">
+    <!-- Show Client -->
+    <div class="d-flex flex-column align-items-center w-100">
+      <div>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </div>
+
+      <div class="d-flex flex-column w-100">
+        <table class="table table-primary w-100">
+          <tr>
+            <th scope="col">Clients ( {{count}} )</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">NIC</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">Gender</th>
+            <th scope="col"></th>
+          </tr>
+          {% for client in clients %}
+          <tr>
+            <td scope="col">
+              <h6>{{client.user.first_name}} {{client.user.last_name}}</h6>
+            </td>
+            <td scope="col"><h6>{{client.number}}</h6></td>
+            <td scope="col"><h6>{{client.nic}}</h6></td>
+            <td scope="col"><h6>{{client.birthday}}</h6></td>
+            <td scope="col"><h6>{{client.gender}}</h6></td>
+            <td scope="col">
+              <button class="btn btn-outline-primary p-0 w-3">
+                <a class="nav-link" href="{% url 'update' client.id %}">
+                  <span class="material-symbols-outlined">stylus</span>
+                </a>
+              </button>
+              <button class="btn btn-outline-danger p-0">
+                <a class="nav-link" href="{% url 'delete' client.id %}">
+                  <span class="material-symbols-outlined">delete</span>
+                </a>
+              </button>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td></td>
+            <td><h1>No clients</h1></td>
+            <td></td>
+          </tr>
+          {% endfor %}
+        </table>
+
+        <!-- Pagination -->
+      </div>
+
+      <nav aria-label="Page navigation ">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.previous_page_number }}"
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.previous_page_number }}"
+              >{{ page_obj.previous_page_number }}</a
+            >
+          </li>
+
+          {% else %}
+
+          <a
+            class="page-link"
+            href="?page={{ page_obj.number }}"
+            aria-label="Previous"
+          >
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+
+          {% endif %}
+
+          <li class="page-item">
+            <a class="page-link active" href="?page={{ page_obj.number }}"
+              >{{ page_obj.number }}</a
+            >
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.next_page_number }}"
+              aria-current="page"
+              >{{ page_obj.next_page_number }}</a
+            >
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.next_page_number }}"
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% else %}
+
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ page_obj.paginator.num_pages }}"
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Fltering -->
+    <div>
+      <form method="GET">
+        <input
+          type="submit"
+          name="action"
+          value="Filter"
+          class="form-control btn btn-outline-primary"
+        /><br />
+
+        <!-- Category -->
+        <label for="category" class="form-label">Categories</label>
+        <select
+          name="category"
+          id="category"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="{{cat}}" name="val_cat">All Categories</option>
+          {% for category in categories %}
+          <option value="{{category.id}}">{{category.category_title}}</option>
+          {% endfor %}</select
+        ><br />
+
+        <!-- Job -->
+        <label for="job" class="form-label">Jobs</label>
+        <select
+          name="job"
+          id="job"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option>All Jobs</option>
+          {% for job in jobs %}
+          <option value="{{job.id}}">{{job.job_title}}</option>
+          {% endfor %}</select
+        ><br />
+
+        <!-- Sector -->
+        <label for="sector" class="form-label">Sectors</label>
+        <select
+          name="sector"
+          id="sector"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option>All Sectors</option>
+          {% for sector in sectors %}
+          <option value="{{sector.id}}">{{sector.sector_title}}</option>
+          {% endfor %}</select
+        ><br />
+
+        <!-- province -->
+        <label for="province" class="form-label">Provinces</label>
+        <select
+          name="province"
+          id="province"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option>All Provinces</option>
+          {% for province in provinces %}
+          <option value="{{province.id}}">{{province.province_title}}</option>
+          {% endfor %}</select
+        ><br />
+
+        <!-- District -->
+        <label for="district" class="form-label">Districts</label>
+        <select
+          name="district"
+          id="district"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option>All Districts</option>
+          {% for district in districts %}
+          <option value="{{district.id}}">{{district.district_title}}</option>
+          {% endfor %}</select
+        ><br />
+
+        <!-- City -->
+        <label for="city" class="form-label">Cities</label>
+        <select
+          name="city"
+          id="city"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option>All Cities</option>
+          {% for city in cities %}
+          <option value="{{city.id}}">{{city.city_title}}</option>
+          {% endfor %}</select
+        ><br />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

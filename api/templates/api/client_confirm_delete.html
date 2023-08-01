@@ -8,7 +8,7 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="active">
         {% if request.user.is_staff %}
           <a class="nav-link" href="{% url 'admin-screen' %}">
             <span class="material-symbols-outlined">
@@ -36,7 +36,7 @@
 
 
 <div class="d-flex justify-content-center">
-  <div class="card" style="width: 18rem;">
+  <div class="card" style="width: 15rem;">
     <img src="{{client.photo.url}}" class="card-img-top" alt="cleint-photo">
     <div class="card-body">
     <form method="POST">

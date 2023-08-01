@@ -1,139 +1,153 @@
-{% extends 'api/base.html' %} 
-{% block content %}
+{% extends 'api/base.html' %} {% block content %}
 
-
-<nav class="navbar navbar-expand-lg d-flex mb-4">  
-  
+<nav class="navbar navbar-expand-lg d-flex mb-4">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto w-100">        
+    <ul class="navbar-nav mr-auto w-100">
       <li class="nav-item w-100">
-        <div class="d-flex justify-content-between w-100" >
-          <div>
-      
-          </div>
-        <div>
-          {% if client_available %}
-          <button class="btn btn-danger btn-lg">
-            <a href="{% url 'delete' client.id %}" class="nav-link">Delete</a>
-        </button>
-          <button class="btn btn-primary btn-lg">
-              <a href="{% url 'update' client.id %}" class="nav-link">Update</a>
-          </button>
-          {% else %}
-          <button class="btn btn-primary btn-lg">
-              <a href="{% url 'add-client-detail' %}" class="nav-link">AddDetails</a>
-          </button>
-           {% endif %}
-           <button class="btn btn-primary btn-lg">
-            <a href="{% url 'update-user' user.id %}" class="nav-link">Profile</a>
-           </button>
-          <button class="btn btn-primary btn-lg">
-              <a href="{% url 'admin-logout' %}" class="nav-link">Logout</a>
-          </button>
+        <div>          
+
+          <nav class="navbar navbar-expand-lg p-0">
+            <div class="container-fluid">
+              
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto ">
+                  <li class="nav-item me-4">
+                    <a class="nav-link active" aria-current="page" href="{% url 'update-user' user.id %}"
+                      >Profile</a
+                    >
+                  </li>
+                  {% if client_available %}
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'update' client.id %}"
+                      >Update</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'delete' client.id %}"
+                      >Delete</a
+                    >
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'add-client-detail' %}"
+                      >Add Details</a
+                    >
+                  </li>
+                  {% endif %}
+                  
+                 
+                  
+                </ul>
+                <a href="{% url 'admin-logout' %}" class="nav-link"><h5>
+                  Logout
+                </h5></a>
+                
+                
+              </div>
+            </div>
+          </nav>
         </div>
-      </div>
-    </ul>      
+      </li>
+    </ul>
   </div>
 </nav>
 
 <div class="d-flex justify-content-center">
-    {% if client_available %}
-    <table class="table w-25">
-        <tr>
-          <th scope="row">1</th>
-          <td>Full Name :</td>
-          <td>{{ user.first_name }} {{ user.last_name}}</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Number :</td>
-          <td>{{client.number}}</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Nic :</td>
-          <td>{{client.nic}}</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>Date of issue :</td>
-          <td>{{client.date_of_issue}}</td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td>Address :</td>
-          <td>{{client.address}}</td>
-        </tr>
-        <tr>
-          <th scope="row">6</th>
-          <td>Birthday :</td>
-          <td>{{client.birthday}}</td>
-        </tr>
-        <tr>
-          <th scope="row">7</th>
-          <td>Gender :</td>
-          <td>{{client.gender}}</td>
-        </tr>
-        <tr>
-          <th scope="row">8</th>
-          <td>Is Sri_lanka :</td>
-          <td>{{client.is_sri_lanka}}</td>
-        </tr>
-        <tr>
-          <th scope="row">9</th>
-          <td>Remark :</td>
-          <td>{{client.remark}}</td>
-        </tr>
-        <tr>
-          <th scope="row">10</th>
-          <td>Job :</td>
-          <td>{{client.job}}</td>
-        </tr>
-        <tr>
-          <th scope="row">11</th>
-          <td>Sector :</td>
-          <td>{{client.sector}}</td>
-        </tr>
-        <tr>
-          <th scope="row">12</th>
-          <td>City :</td>
-          <td>{{client.city}}</td>
-        </tr>
-        <tr>
-          <th scope="row">13</th>
-          <td>District :</td>
-          <td>{{client.district}}</td>
-        </tr>
-        <tr>
-          <th scope="row">14</th>
-          <td>Province :</td>
-          <td>{{client.province}}</td>
-        </tr>
-        <tr>
-          <th scope="row">15</th>
-          <td>Category :</td>
-          <td>{{client.category}}</td>
-        </tr>
-        <tr>
-          <th scope="row">16</th>
-          <td>User Email :</td>
-          <td>{{client.user}}</td>
-        </tr>
-      </table>
+  {% if client_available %}
+  <table class="table w-25">
+    <tr>
+      <th scope="row">1</th>
+      <td>Full Name :</td>
+      <td>{{ user.first_name }} {{ user.last_name}}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Number :</td>
+      <td>{{client.number}}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Nic :</td>
+      <td>{{client.nic}}</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Date of issue :</td>
+      <td>{{client.date_of_issue}}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Address :</td>
+      <td>{{client.address}}</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>Birthday :</td>
+      <td>{{client.birthday}}</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>Gender :</td>
+      <td>{{client.gender}}</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>Is Sri_lanka :</td>
+      <td>{{client.is_sri_lanka}}</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Remark :</td>
+      <td>{{client.remark}}</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>Job :</td>
+      <td>{{client.job}}</td>
+    </tr>
+    <tr>
+      <th scope="row">11</th>
+      <td>Sector :</td>
+      <td>{{client.sector}}</td>
+    </tr>
+    <tr>
+      <th scope="row">12</th>
+      <td>City :</td>
+      <td>{{client.city}}</td>
+    </tr>
+    <tr>
+      <th scope="row">13</th>
+      <td>District :</td>
+      <td>{{client.district}}</td>
+    </tr>
+    <tr>
+      <th scope="row">14</th>
+      <td>Province :</td>
+      <td>{{client.province}}</td>
+    </tr>
+    <tr>
+      <th scope="row">15</th>
+      <td>Category :</td>
+      <td>{{client.category}}</td>
+    </tr>
+    <tr>
+      <th scope="row">16</th>
+      <td>User Email :</td>
+      <td>{{client.user}}</td>
+    </tr>
+  </table>
 
-      <div>
-        <div class="card" style="width: 18rem;">
-            <img src="{{ client.photo.url }}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-title">Photo</p>              
-              
-            </div>
-          </div>
-
+  <div>
+    <div class="card" style="width: 15rem">
+      <img src="{{ client.photo.url }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <p class="card-title">Photo</p>
       </div>
-     {% else %}
-     <h1>Add Client Details</h1>
-     {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <h1>No Details</h1>
+  {% endif %}
 </div>
 
 {% endblock content %}

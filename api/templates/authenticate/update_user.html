@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-lg d-flex">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto w-100">
-      <li class="nav-item active w-100">
+      <li class="active w-100">
         <div class="d-flex justify-content-between">  
           {% if user.is_staff %}
           <a class="nav-link" href="{% url 'user' %}">
@@ -17,7 +17,7 @@
           {% endif %}                
           
           
-          <h1>Update {{user.username}}</h3>
+          <h1>Update Profile</h3>
           
           <div></div>
         </div>
